@@ -1,0 +1,42 @@
+pre {
+	text-align: left;
+}
+#HTML, #CSS, #JSON, #JS {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 1em;
+}
+.css {
+	color: #324D5C;
+}
+.css .css-selector-tag {
+	color: #DE5B49;
+}
+.css .css-selector-class {
+	color: #E37B40;
+}
+.css .css-selector-id {
+	color: #F0CA4D;
+}
+.css .css-attr {
+	color: #46B29D;
+}
+.css .css-comment {
+	color: #aaa;
+}
+
+.color-form .color-form-element {
+	position: relative;
+	display: inline-block;
+}
+.color-form .color-form-element > label,
+.color-form .color-form-element > input {
+	position: relative;
+	display: block;
+}
+input.jscolor {
+	border: none;
+	color: transparent !important;
+	height: 1em;
+	border-radius: 0.5em;
+	cursor: pointer;
+}

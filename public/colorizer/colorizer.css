@@ -1,0 +1,80 @@
+
+/*HTML*/
+.html {
+	color: #324D5C;
+}
+.html .html-tag {
+	color: #46B29D;
+}
+.html .html-attr {
+	color: #E37B40;
+}
+.html .html-attr-value {
+	color: #DE5B49;
+}
+.html .html-comment {
+	color: #aaa;
+}
+
+/*CSS*/
+.css {
+	color: #324D5C;
+}
+.css .css-selector-tag {
+	color: #DE5B49;
+}
+.css .css-selector-class {
+	color: #E37B40;
+}
+.css .css-selector-id {
+	color: #F0CA4D;
+}
+.css .css-attr {
+	color: #46B29D;
+}
+.css .css-comment {
+	color: #aaa;
+}
+
+.js {
+	color: #324D5C;
+}
+.js .js-keyword {
+	color: #DE5B49;
+}
+.js .js-string {
+	color: #46B29D;
+}
+.js .js-parameter {
+	color: #F0CA4D;
+}
+.js .js-function-name {
+	font-style: italic;
+}
+.js .js-function-call {
+	color: #E37B40;
+}
+.js .js-comment {
+	color: #aaa;
+}
+
+.json {
+	color: #324D5C;
+}
+.json .json-key {
+	color: #46B29D;
+}
+.json .json-string {
+	color: #E37B40;
+}
+.json .json-number {
+	color: #DE5B49;
+}
+.json-object {
+	list-style: none;
+}
+.json-attribute,
+.json-array > .json-array-value{
+	padding-left: 2em;
+	display: list-item;
+}

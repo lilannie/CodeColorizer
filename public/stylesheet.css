@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+body {
+	font-size: 100%;
+	font-family: 'Roboto', sans-serif ;
+	font-weight: 300;
+	background-color: #fafafa;
+	margin: 0;
+	padding: 0;
+}
+nav {
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+nav > div {
+	position: relative;
+	display: inline-block;
+	width: 49%;
+	box-sizing: border-box;
+}
+nav > div.nav-left {
+	text-align: left;
+}
+nav > div.nav-right {
+	text-align: right;
+}
+
+nav > div > a {
+	display: inline-block;
+	text-decoration: none;
+	padding: 0.5em 0.5em;
+	font-size: 1.2em;
+	color: #222222;
+	background-color: transparent;
+}
+nav > div > a.active {
+	border-bottom: 3px solid #ddd;
+}
+nav > div > a:hover {
+	color: #000000;
+	background-color: #ddd;
+	transition: background-color 0.3s;
+}
+
+main {
+	width: 90vw;
+	margin: 0 5vw;
+
+	text-align: center;
+	color: #222;
+}
+main h2 {
+	display: inline-block;
+	font-size: 3em;
+	font-weight: 500;
+	color: #222;
+	border-bottom: 1px solid;
+	padding-bottom: 0.1em;
+}
+main form {
+	text-align: left;
+	margin-top: 2em;
+}
+main select{
+	width: 100%;
+	padding: 0.3em;
+	font-family: inherit ;
+	border: none;
+	border-left: 7px solid #ddd;
+}
+main textarea {
+	width: 100%;
+	max-width: 100%;
+	border: none;
+	border-left: 7px solid #ddd;
+	box-sizing: border-box;
+	font-family: inherit ;
+	font-size: 0.9em;
+}
+main textarea:focus, main select:focus {
+	outline-color: transparent;
+}
+main button {
+	/*width: 100%;*/
+	display: inline-block;
+	border: 1px solid #ccc;
+	background-color: #fff;
+	font-size: 1em;
+	font-family: inherit;
+	padding: 0.3em 1em;
+	transition: background-color 0.3s;
+}
+main button:hover {
+	cursor: pointer;
+	background-color: #bbb;
+}
+
+main pre {
+	font-family: inherit;
+	font-size: 0.9em;
+	background-color: #eee;
+	border-left: 7px solid #ddd;
+	box-sizing: border-box;
+	padding: 0.3em;
+	overflow-x: auto;
+}
+
+#result-pretty, #result-raw {
+	min-height: 1em;
+}

@@ -1,0 +1,35 @@
+start =
+	css
+
+css =
+	css:(pws:blankSpace node:(block / comment / import) ews:blankSpace {return pws+node+ews;})*
+    	{return css.join("");}
+import =
+	"@import" i:(!";" i:. {return i})* ";" {return "@import" + i.join("") + ";";}
+comment =
+	"/*" txt:(!"*/" txt:. {return txt})* "*/"
+    	{return "<span class='css-comment'>/*"+txt.join("")+"*/</span>" ;}
+block =
+	sel:(pws:([*,>+~=\[\]|^$:\-()]/ws)* s:selector ews:([*,>+~=\[\]|^$:\-()]/ws/nl)* {return pws.join("") + s + ews.join("");})+ obr:"{" pws:blankSpace? attrs:attrList ews:blankSpace? cbr:"}"
+    	{return "<span class='css-selector'>"+sel.join("")+"</span>"+obr+pws+attrs+ews+cbr;}
+selector =
+	sel:(t:alphaNumWord {return "<span class='css-selector-tag'>"+t+"</span>"; }
+    	/ c:("." alphaNumWord) {return "<span class='css-selector-class'>"+c.join("")+"</span>";}
+        / i:("#" alphaNumWord){return "<span class='css-selector-id'>"+i.join("")+"</span>";})
+
+attrList =
+	attrs:(pws:blankSpace attr:attribute ews:blankSpace {return pws+attr+ews;})*
+    	{return attrs.join("");}
+
+attribute =
+	attr:alphaNumWord ":" value:(ws:ws* val:(!";" v:. {return v;})+ {return ws.join("") + val.join("");}) ws* ";"
+    	{return "<span class='css-attr'>"+attr+"</span>:<span class='css-attr-value'>"+value+"</span>;"};
+
+alphaNumWord =
+	alpha:[a-zA-Z0-9\-_]+ {return alpha.join("");}
+
+ws = ws:[ \t]+ { return ws.join("");}
+nl = nl:("\n" / "\n\r") {return nl;}
+
+blankSpace =
+	bs:(ws:ws {return ws;}/ nl:nl {return nl;})* {return bs.join("")}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<meta name="description" content="A tool for Colorizing code on the web" />
+	<meta name="keywords" content="tool, code, color" />
+	<meta name="author" content="Zach Newton" />
+	<link rel="stylesheet" href="/stylesheet.css">
+	<link rel="stylesheet" href="/login/login.css">
+</head>
+<body>
+<nav>
+	<div class="nav-left">
+		<a href="/">Code Colorizer</a>
+		<a href="/theme">Theme Picker</a>
+	</div>
+	<div class="nav-right">
+        <a id="logout_button" href="/logout">Logout</a>
+        <a id="login_button" href="/login" class="active">Login</a>
+        <a id="signup_button" href="/signup">Sign Up</a>
+    </div>
+</nav>
+
+<main>
+	<h2>Login</h2>
+	<form class="login-form" action="/login" method="post" >
+		<div class="login-form-component">
+            <input id="username" type="text" name="username" placeholder="Username">
+        </div>
+		<div class="login-form-component">
+            <input id="password" type="password" name="password" placeholder="Password">
+        </div>
+		<button type="submit" id="login-submit">Login / Create Account</button>
+	</form>
+</main>
+
+<script type="text/javascript">
+    document.getElementById("logout_button").style.display = "none";
+</script>
+</body>
+</html>

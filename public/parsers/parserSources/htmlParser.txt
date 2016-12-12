@@ -1,0 +1,39 @@
+start =
+	html
+
+html =
+	html:(pws:blankSpace node:(block / comment / text / soloTag) ews:blankSpace {return pws+node+ews;})*
+    	{return html.join("");}
+
+text =
+	ws* words:(word:word ws* {return word;})+ {return words.join(" ");}
+comment =
+	"<!--" txt:(!"-->" txt:. {return txt})* "-->" {return "<span class='html-comment'>&lt;!--"+txt.join("")+"--&gt;</span>" ;}
+block =
+	"<" ot:tag ">" pws:blankSpace? innerHTML:html blankSpace? "</" ct:tag ">"
+    	{return "<span class='html-tag'>"+"&lt;"+ot+"&gt;"+"</span>"+pws+innerHTML+"<span class='html-tag'>"+"&lt;/"+ct+"&gt;"+"</span>";}
+soloTag =
+	"<" ot:tag ("/")?">"
+    	{return "<span class='html-tag'>"+"&lt;"+ot+"&gt;"+"</span>";}
+
+tag =
+	t:alphaWord attrs:(ws+ atr:attribute {return ""+atr;})*
+    	{return t + (attrs.length != 0 ? " " : "")+ attrs.join(" ");}
+
+attribute =
+	attr:alphaWord v:attrValue?
+    	{return "<span class='html-attr'>"+attr+((v != null) ? v : "")+"</span>";}
+attrValue =
+	"=" value:([\"]val:string?[\"]{return (val != null) ? val : "";})
+    	{return "=<span class='html-attr-value'>'"+value+"'</span>";}
+word = w:[a-zA-Z0-9,.!@#$%^&*(){}+\-=_|~`'":;?/\\\[\]]+ {return w.join("");}
+string = s:[a-zA-Z0-9,.!@#$%^&*(){}+\-=_|~`':;?/\\\[\] ]+ {return s.join("");}
+
+alphaWord =
+	alpha:[a-zA-Z0-9\-_]+ {return alpha.join("");}
+
+ws = ws:[ \t]+ { return ws.join("");}
+nl = nl:("\n" / "\n\r") {return nl;}
+
+blankSpace =
+	bs:(ws:ws {return ws;}/ nl:nl {return nl;})* {return bs.join("")}

@@ -1,0 +1,25 @@
+form.login-form {
+	text-align: center;
+	width: 60vw;
+	margin: 0 auto;
+	font-size: 1.2em;
+}
+form.login-form .login-form-component,
+form.login-form .login-form-component > input,
+form.login-form button {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+form.login-form .login-form-component > input {
+	font-family: inherit;
+	font-size: inherit;
+	border: none;
+	padding: 0.5em 0.3em;
+	margin: 0.3em 0;
+	border-bottom: 1px solid #ddd;
+}
+
+form.login-form .login-form-component > input:focus {
+	outline: none;
+}

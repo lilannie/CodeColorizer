@@ -1,0 +1,35 @@
+start =
+	json
+json =
+	bs obr:"{" bs attrList:attributes bs cbr:"}" bs
+    	{return "<span class='json-object'>"+obr + "\n" + attrList + "" + cbr +"</span>";}
+
+attributes =
+	bs rest:(bs attr:attribute bs "," {return "<span class='json-attribute'>"+attr+",</span>";})* bs last:(attr:attribute {return "<span class='json-attribute'>"+attr+"</span>";})? bs
+    	{rest.push(last); return ""+rest.join("");}
+attribute =
+	k:key bs ":" bs v:value
+    	{return k + ": " + v;}
+key =
+	k:(string / simpleWord)
+    	{return "<span class='json-key'>"+k+"</span>";}
+value =
+	v:(string / json / array / number)
+    	{return "<span class='json-value'>"+v+"</span>";}
+string =
+	"\"" cont:(!"\""  c:. {return c;})* "\""
+    	{return "<span class='json-string'>\""+cont.join("")+"\"</span>";}
+    / "'" cont:(!"'" c:. {return c;})* "'"
+    	{return "<span class='json-string'>'"+cont.join("")+"'</span>";}
+number =
+	start:[0-9]+ rest:("." nums:[0-9]+ {return nums.join("");})?
+    	{return "<span class='json-number'>"+start + (rest != null ? dec : "")+"</span>";}
+array =
+	"[" 	bs rest:(bs attr:value bs "," {return "<span class='json-array-value'>"+attr+",</span>";})* bs last:(val:value {return "<span class='json-array-value'>"+val+"</span>";})? bs "]"
+    	{rest.push(last); return "<span class='json-array'>[\n"  + rest.join("") + "]</span>";}
+simpleWord =
+	sw:[a-zA-Z_]+
+    	{return sw.join("");}
+
+
+bs = bs:[ \t\n\r]* {return bs.join("");}

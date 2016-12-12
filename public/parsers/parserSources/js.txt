@@ -1,0 +1,70 @@
+start =
+	js
+
+js =
+	js:(pws:blankSpace op:"("* obs:blankSpace node:(ifBlock {return "IF\n"} / caseBlock {return "CASE\n"}  / function {return "FUNCTION\n"}/ call {return "CALL\n"}/ declaration {return "DECLARATION\n"} / object {return "OBJECT\n"} / array {return "ARRAY\n"} /  comment {return "COMMENT\n"} ) pscws:blankSpace sc:";"? cbs:blankSpace cp:")"* ews:blankSpace {return pws+op.join("")+obs+node+pscws+(sc != null ? sc: "")+cbs+cp.join("")+ews;})*
+    	{return js.join("");}
+
+function =
+	f:"function" ws* v:varName? ws* "(" p:parameters? ")" blankSpace obr:"{" innerJS:(js / blankSpace) cbr:"}"
+    	{return "<span class='js-keyword'>"+f+"</span>" + (v != null ? " <span class='js-function-name'>" + v+"</span>" : "") + " (" + (p != null ? p : "") + ") " + obr + (innerJS != null ? innerJS : "") + cbr;}
+object =
+	obr:"{" rest:(attr:objAttr "," {return attr;})* last:objAttr? cbr:"}"
+    	{ return obr + rest.join(",") + last + cbr; }
+array =
+	"[" pws:blankSpace rest:(blankSpace attr:objType blankSpace "," {return attr;})* blankSpace last:objType? ews:blankSpace "]"
+    	{rest.push(last); return "[" + pws + rest + ews + "]";}
+declaration =
+	vt:varType ws* vn:varName blankSpace e:(eq:("=" blankSpace val:objType {return " = " + val;})+ {return eq.join("");} / ";" / nl)
+    	{return vt +" "+ vn + e;}
+call =
+	vn:varName c:("." cn:varName "(" p:parameters? ")" {return ".<span class='js-function-call'>" + cn + "</span>(" + (p != null ? p : "") + ")";})+
+    	{return vn + c.join("");}
+comment =
+	"/*" txt:(!"*/" txt:. {return txt})* "*/"
+    	{return "<span class='js-comment'>/*"+txt.join("")+"*/</span>" ;}
+    / "//" txt:(!nl txt:. {return txt})* nl:nl?
+    	{return "<span class='js-comment'>//"+txt.join("")+"</span>" +(nl != null ? nl : "") ;}
+ifBlock =
+	ib:(c:("if" / "else if" / "else") ws* p:("(" ws* b:objType ws* ")" {return b;})? ws* obr:"{" innerJS:js cbr:"}" ews:blankSpace {return c+(p != null ? " ("+p+")":"")+obr+innerJS+cbr+ews;})+
+    	{return ib.join("");}
+caseBlock =
+	c:("case" / "default") ws* p:(op:"("? ws* o:objType ws* cp:")"? {return (op!=null?op:"")+" "+o+" "+(cp!=null?cp:"")})? ws* ":" innerJS:js "break"
+    	{return c+(p!=null?" "+p+" ":"")+" : " + innerJS+"break";}
+objAttr =
+	pws:blankSpace key:(varName / string) ":" ws* val:objType ews:blankSpace
+    	{ return pws + key + ": " + val + ews; }
+varName =
+    !("break" / "if" / "else" / "function" / "while" / "case" / "continue" / "for" / "var" / "let")
+	first:[a-zA-Z$_] rest:(dot:"."? anw:alphaNumWord {return (dot != null ? dot : "")+anw;})*
+    	{return first + rest.join("");}
+varType =
+	vt:("let" / "var")? {return (vt != null ? "<span class='js-keyword'>"+vt+"</span>" : ""); }
+parameters =
+	blankSpace first:parameter blankSpace rest:("," blankSpace param:parameter blankSpace {return param;})*
+    	{rest.unshift(first); return rest.join(" , ");}
+parameter =
+	objType
+string =
+	"\"" cont:(!"\""  c:. {return c;})* "\"" {return "<span class='js-string'>\""+cont.join("")+"\"</span>";}
+    / "'" cont:(!"'" c:. {return c;})* "'" {return "<span class='js-string'>'"+cont.join("")+"'</span>";}
+number =
+	start:[0-9]+ rest:("." nums:[0-9]+ {return nums.join("");})?
+    	{return "<span class='js-number'>"+start + (rest != null ? dec : "")+"</span>";}
+boolean =
+	first:(function / array / object / call / varName / string / number) ws* eq:[=!<>&| ()]+ ws* second:objType cp:[()]+
+    	{return first + " "+eq.join("")+" "+second+" "+cp;}
+ternary =
+	b:(function / array / object / call / varName / string / number / boolean) ws* "?" ws* objType ws* ":" ws* objType
+
+objType =
+	function / array / object / call / varName / string / number / boolean / ternary
+
+alphaNumWord =
+	alpha:[a-zA-Z0-9\-_]+ {return alpha.join("");}
+
+ws = ws:[ \t]+ { return ws.join("");}
+nl = nl:("\n" / "\n\r") {return nl;}
+
+blankSpace =
+	bs:(ws:ws {return ws;}/ nl:nl {return nl;})* {return bs.join("")}

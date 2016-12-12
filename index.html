@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Code Colorizer</title>
+	<meta name="description" content="A tool for Colorizing code on the web" />
+	<meta name="keywords" content="tool, code, color" />
+	<meta name="author" content="Zach Newton" />
+	<link rel="stylesheet" href="stylesheet.css">
+	<link rel="stylesheet" href="/colorizer/colorizer.css">
+	<link rel="icon" href="/favicon-code.ico">
+	<script type="text/javascript" src="/parsers/htmlParser.js"></script>
+	<script type="text/javascript" src="/parsers/cssParser.js"></script>
+	<script type="text/javascript" src="/parsers/jsParser.js"></script>
+	<script type="text/javascript" src="/parsers/jsonParser.js"></script>
+	<script type="text/javascript" src="/colorizer/colorizer.js"></script>
+</head>
+<body>
+<nav>
+	<div class="nav-left">
+		<a href="/" class="active">Code Colorizer</a>
+		<a href="/theme">Theme Picker</a>
+	</div>
+	<div class="nav-right">
+        <a id="logout_button" href="/logout">Logout</a>
+        <a id="login_button" href="/login">Login</a>
+        <a id="signup_button" href="/signup">Sign Up</a>
+	</div>
+</nav>
+
+<main>
+	<h2>Code Colorizer</h2>
+	<div>
+	Use this tool to colorize your code by adding span tags to the input. Span tags will include classes
+	that can be used for coloring.
+	</div>
+
+	<form>
+		<label for="language-select">Language:</label>
+		<select id="language-select" name="language">
+			<option value="json">JSON</option>
+			<option value="css">CSS</option>
+			<option value="html" selected>HTML</option>
+			<option value="js">JS(warning, only very simple JS)</option>
+			<option value="php" disabled>PHP</option>
+		</select>
+		<label for="code-input">Code:</label>
+		<textarea id="code-input" name="code" placeholder="Paste your code in here..." rows="15"></textarea>
+		<!--<label>Result (pretty):</label>-->
+		<button type="button" id="copy">Copy Raw Result to Clipboard</button>
+		<pre id="result-pretty"></pre>
+		<label>Raw:</label>
+		<pre id="result-raw"></pre>
+	</form>
+</main>
+
+<script type="text/javascript">
+    document.getElementById("login_button").style.display = "none";
+    document.getElementById("signup_button").style.display = "none";
+</script>
+</body>
+</html>

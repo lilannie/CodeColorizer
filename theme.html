@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Theme Picker</title>
+	<meta name="description" content="A tool for Colorizing code on the web" />
+	<meta name="keywords" content="tool, code, color" />
+	<meta name="author" content="Zach Newton" />
+	<link rel="stylesheet" href="/stylesheet.css">
+	<link rel="stylesheet" href="/theme/theme.css">
+	<link rel="icon" href="/favicon-code.ico">
+	<script type="text/javascript" src="/theme/jscolor.min.js"></script>
+	<script type="text/javascript" src="/parsers/htmlParser.js"></script>
+	<script type="text/javascript" src="/parsers/cssParser.js"></script>
+	<script type="text/javascript" src="/parsers/jsParser.js"></script>
+	<script type="text/javascript" src="/parsers/jsonParser.js"></script>
+	<script type="text/javascript" src="/theme/theme.js"></script>
+</head>
+<body>
+<nav>
+	<div class="nav-left">
+		<a href="/">Code Colorizer</a>
+		<a href="/theme" class="active">Theme Picker</a>
+	</div>
+	<div class="nav-right">
+        <a id="logout_button" href="/logout">Logout</a>
+        <a id="login_button" href="/login">Login</a>
+        <a id="signup_button" href="/signup">Sign Up</a>
+    </div>
+</nav>
+
+<main>
+	<h2>Theme Picker</h2>
+	<div>
+	Use this tool change the colors of the different tags in each language.
+	</div>
+
+	<div id="HTML">
+		<h3>HTML Styling</h3>
+		<form class="color-form">
+			<div class="color-form-element"><label for="html-main-color">.html</label> <input class="jscolor html-color-input" id="html-main-color" value="324D5C"></div>
+			<div class="color-form-element"><label for="html-tag-color">.html-tag</label> <input class="jscolor html-color-input" id="html-tag-color" value="46B29D"></div>
+			<div class="color-form-element"><label for="html-attr-color">.html-attr</label> <input class="jscolor html-color-input" id="html-attr-color" value="E37B40"></div>
+			<div class="color-form-element"><label for="html-attr-value-color">.html-attr-value</label> <input class="jscolor html-color-input" id="html-attr-value-color" value="DE5B49"></div>
+			<div class="color-form-element"><label for="html-comment-color">.html-comment</label> <input class="jscolor html-color-input" id="html-comment-color" value="aaaaaa"></div>
+		</form>
+		<pre id="HTML-example" class="html">
+<!-- this is a comment -->
+<div class="class">
+	<span id="id">This is a span</span>
+	<img src="img/src">
+</div></pre>
+		<pre id="HTML-style-printed" class="css"></pre>
+		<style id="HTML-style" scoped>
+.html {
+	color: #324D5C;
+}
+.html .html-tag {
+	color: #46B29D;
+}
+.html .html-attr {
+	color: #E37B40;
+}
+.html .html-attr-value {
+	color: #DE5B49;
+}
+.html .html-comment {
+	color: #aaa;
+}
+		</style>
+		<button type="button" id="html-style-copy">Copy HTML Style to Clipboard</button>
+	</div>
+
+	<div id="CSS">
+		<h3>CSS Styling</h3>
+
+		<form class="color-form">
+			<div class="color-form-element"><label for="css-main-color">.css</label> <input class="jscolor css-color-input" id="css-main-color" value="324D5C"></div>
+			<div class="color-form-element"><label for="css-selector-tag-color">.css-selector-tag</label> <input class="jscolor css-color-input" id="css-selector-tag-color" value="DE5B49"></div>
+			<div class="color-form-element"><label for="css-selector-class-color">.css-selector-class</label> <input class="jscolor css-color-input" id="css-selector-class-color" value="E37B40"></div>
+			<div class="color-form-element"><label for="css-selector-id-color">.css-selector-id</label> <input class="jscolor css-color-input" id="css-selector-id-color" value="F0CA4D"></div>
+			<div class="color-form-element"><label for="css-attr-color">.css-attr</label> <input class="jscolor css-color-input" id="css-attr-color" value="46B29D"></div>
+			<div class="color-form-element"><label for="css-comment-color">.css-comment</label> <input class="jscolor css-color-input" id="css-comment-color" value="aaaaaa"></div>
+		</form>
+
+		<pre id="CSS-example" class="css">
+/* this is a comment */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+body {
+	font-size: 100%;
+	font-family: 'Roboto', sans-serif ;
+	font-weight: 300;
+	background-color: #fafafa;
+	margin: 0;
+	padding: 0;
+}
+
+main .class{
+	width: 90vw;
+	margin: 0 5vw;
+
+	text-align: center;
+	color: #222;
+}
+#id{
+	background-image: url('img/url');
+	color: #222;
+}</pre>
+		<pre id="CSS-style-printed" class="css"></pre>
+		<style id="CSS-style" scoped>
+.css {
+	color: #324D5C;
+}
+.css .css-selector-tag {
+	color: #DE5B49;
+}
+.css .css-selector-class {
+	color: #E37B40;
+}
+.css .css-selector-id {
+	color: #F0CA4D;
+}
+.css .css-attr {
+	color: #46B29D;
+}
+.css .css-comment {
+	color: #aaa;
+}
+		</style>
+		<button type="button" id="css-style-copy">Copy CSS Style to Clipboard</button>
+	</div>
+
+	<div id="JSON">
+		<h3>JSON Styling</h3>
+
+		<form class="color-form">
+			<div class="color-form-element"><label for="json-main-color">.json</label> <input class="jscolor json-color-input" id="json-main-color" value="324D5C"></div>
+			<div class="color-form-element"><label for="json-key-color">.json-key</label> <input class="jscolor json-color-input" id="json-key-color" value="46B29D"></div>
+			<div class="color-form-element"><label for="json-string-color">.json-string</label> <input class="jscolor json-color-input" id="json-string-color" value="E37B40"></div>
+			<div class="color-form-element"><label for="json-number-color">.json-number</label> <input class="jscolor json-color-input" id="json-number-color" value="DE5B49"></div>
+		</form>
+
+		<pre id="JSON-example" class="json">
+{
+key: "value",
+array: ["value","value"],
+object: { key: "value" }
+}
+		</pre>
+		<pre id="JSON-style-printed" class="css"></pre>
+		<style id="JSON-style" scoped>
+.json {
+	color: #324D5C;
+}
+.json .json-key {
+	color: #46B29D;
+}
+.json .json-string {
+	color: #E37B40;
+}
+.json .json-number {
+	color: #DE5B49;
+}
+.json-object {
+	list-style: none;
+}
+.json-attribute,
+.json-array > .json-array-value{
+	padding-left: 2em;
+	display: list-item;
+}
+		</style>
+		<button type="button" id="json-style-copy">Copy JSON Style to Clipboard</button>
+	</div>
+
+	<div id="JS">
+		<h3>JS Styling</h3>
+
+		<form class="color-form">
+			<div class="color-form-element"><label for="js-main-color">.js</label> <input class="jscolor js-color-input" id="js-main-color" value="324D5C"></div>
+			<div class="color-form-element"><label for="js-keyword-color">.js-keyword</label> <input class="jscolor js-color-input" id="js-keyword-color" value="DE5B49"></div>
+			<div class="color-form-element"><label for="js-string-color">.js-string</label> <input class="jscolor js-color-input" id="js-string-color" value="46B29D"></div>
+			<div class="color-form-element"><label for="js-parameter-color">.js-parameter</label> <input class="jscolor js-color-input" id="js-parameter-color" value="F0CA4D"></div>
+			<div class="color-form-element"><label for="js-function-call-color">.js-function-call</label> <input class="jscolor js-color-input" id="js-function-call-color" value="E37B40"></div>
+			<div class="color-form-element"><label for="js-comment-color">.js-comment</label> <input class="jscolor js-color-input" id="js-comment-color" value="aaaaaa"></div>
+		</form>
+
+		<pre id="JS-example" class="js">
+// this is a comment
+var varName = "Variable";
+function name(param) {
+    var variable = "string";
+}
+name.callFunction();
+/*
+this is also a comment
+*/</pre>
+		<pre id="JS-style-printed" class="css"></pre>
+		<style id="JS-style" scoped>
+.js {
+	color: #324D5C;
+}
+.js .js-keyword {
+	color: #DE5B49;
+}
+.js .js-string {
+	color: #46B29D;
+}
+.js .js-parameter {
+	color: #F0CA4D;
+}
+.js .js-function-name {
+	font-style: italic;
+}
+.js .js-function-call {
+	color: #E37B40;
+}
+.js .js-comment {
+	color: #aaa;
+}
+		</style>
+		<button type="button" id="js-style-copy">Copy JS Style to Clipboard</button>
+	</div>
+</main>
+
+<script type="text/javascript">
+    document.getElementById("login_button").style.display = "none";
+    document.getElementById("signup_button").style.display = "none";
+</script>
+</body>
+</html>
