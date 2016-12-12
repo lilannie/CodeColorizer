@@ -12,16 +12,16 @@ document.addEventListener('DOMContentLoaded', function (e){
 	document.getElementById('JS-style-printed').innerHTML = parse(document.getElementById('JS-style').innerHTML,cssParser);
 
 	document.getElementById('html-style-copy').addEventListener('click', function(e){
-		copyToClipboard(document.getElementById('HTML-style-printed').innerHTML);
+		copyToClipboard(document.getElementById('HTML-style-printed').textContent);
 	});
 	document.getElementById('css-style-copy').addEventListener('click', function(e){
-		copyToClipboard(document.getElementById('CSS-style-printed').innerHTML);
+		copyToClipboard(document.getElementById('CSS-style-printed').textContent);
 	});
 	document.getElementById('json-style-copy').addEventListener('click', function(e){
-		copyToClipboard(document.getElementById('JSON-style-printed').innerHTML);
+		copyToClipboard(document.getElementById('JSON-style-printed').textContent);
 	});
 	document.getElementById('js-style-copy').addEventListener('click', function(e){
-		copyToClipboard(document.getElementById('JS-style-printed').innerHTML);
+		copyToClipboard(document.getElementById('JS-style-printed').textContent);
 	});
 
 	var html_color_inputs = document.getElementsByClassName('html-color-input');
