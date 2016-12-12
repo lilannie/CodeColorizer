@@ -97,6 +97,6 @@ app.get('/logout', function(req, res) {
     res.redirect("/");
 });
 
-app.listen(8080, function () {
-   console.log("Listening at http://localhost:8080");
+app.listen(3035, function () {
+   console.log("Listening at http://localhost:3035");
 });
