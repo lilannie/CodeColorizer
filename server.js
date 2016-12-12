@@ -47,10 +47,9 @@ app.post('/login', function(req, res) {
     auth.signInWithEmailAndPassword(req.body.username, req.body.password)
         .catch(function () {
             console.log("Error signing in.");
-            res.redirect("/login");
         })
         .then(function () {
-            res.redirect("/");
+            res.redirect("/login");
         });
 });
 app.get('/signup', function(req, res) {
@@ -71,10 +70,9 @@ app.post('/signup', function(req, res) {
     auth.createUserWithEmailAndPassword(req.body.username, req.body.password)
         .catch(function () {
             console.log("Error signing up.");
-            res.redirect("/signup");
         })
         .then(function () {
-            res.redirect("/");
+            res.redirect("/signup");
         });
 });
 
