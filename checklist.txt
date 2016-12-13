@@ -1,0 +1,11 @@
+Checklist
+
+1. /public/colorizer/colorizer.js
+Lines # 19 - # 52: Getting user input for which language to parse for
+
+2. /public/parsers/
+All the parsing logic using PEG.js library, but specifying what to look for
+
+3. /server.js
+All server-side code using Node.js
+Authetication logic and HTTP routing 

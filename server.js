@@ -20,9 +20,7 @@ app.get('/', function (req, res) {
 	console.log("GET /");
 	var user = auth.currentUser;
 	if (user)
-	{
    		res.sendFile(dir+"/index.html");
-	}
 	else
     {
 		console.log("Not logged in");
@@ -33,13 +31,9 @@ app.get('/login', function(req, res) {
 	console.log("GET /login");
 	var user = auth.currentUser;
 	if (user)
-	{
 		res.redirect("/");
-	}
 	else
-    {
 		res.sendFile(dir+"login.html");
-	}
 });
 app.post('/login', function(req, res) {
 	console.log("POST /login");
